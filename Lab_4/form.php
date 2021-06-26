@@ -123,26 +123,31 @@
 			$err_pass = "Password should have uppercase and lowercase alphabe ";
 				}
 
-		else
-		{
-			$arr_1=str_split($_POST["password"]);
+				else
+				{
+					$l=0;
+					$arr_1=str_split($_POST["password"]);
 
-			for ($i=0; $i < count($arr_1) ; $i++) {
-				if (is_numeric($arr_1[$i])) {
-					$pass = htmlspecialchars($_POST["password"]);
-					$err_pass ="";
-				}
-				else {
-					$hasError = true;
-					$err_pass = "Password should have atleast 1 number ";
-				}
-			}
+					for ($i=0; $i < count($arr_1) ; $i++)
+					 {
+						 if (is_numeric($arr_1[$i]))
+						{
+							$l++;
+							break;
+
+						}
+					 }
+					 if ($l==0) {
+						 $hasError = true;
+						 $err_pass = "Password should have atleast 1 number ";
+					 }
+					 else
+					 {
+						 $pass = htmlspecialchars($_POST["password"]);
+					 }
+					}
 
 
-
-
-
-		}
 
     if(empty($_POST["confirm_password"])){
 			$hasError=true;
@@ -317,14 +322,25 @@
 			echo $_POST["name"]."<br>";
 			echo $_POST["username"]."<br>";
 			echo $_POST["password"]."<br>";
+			echo $_POST["confirm_password"]."<br>";
+			echo $_POST["email"]."<br>";
+			echo $_POST["phone_code"]."&nbsp;";
+			echo $_POST["phone_num"]."<br>";
+			echo $_POST["street"]."<br>";
+			echo $_POST["city"]."-";
+			echo $_POST["state"]."<br>";
+			echo $_POST["postal"]."<br>";
+			echo $_POST["day"]."&nbsp;";
+			echo $_POST["month"]."&nbsp;";
+			echo $_POST["year"]."<br>";
 			echo $_POST["gender"]."<br>";
-			echo $_POST["profession"]."<br>";
-			echo $_POST["bio"]."<br>";
-			$arr = $_POST["hobbies"];
+
+			$arr = $_POST["infos"];
 
 			foreach($arr as $e){
 				echo "$e<br>";
 			}
+			echo $_POST["bio"]."<br>";
 		}
 
 	}
@@ -448,7 +464,7 @@
 							<br><span><?php echo $err_day;?></span> &nbsp; &nbsp; <span><?php echo $err_month;?></span> &nbsp; &nbsp; <span><?php echo $err_year;?></span>
 						</td>
 					</tr>
-			r>
+
 
 					<tr>
 						<td align="right">Gender</td>
